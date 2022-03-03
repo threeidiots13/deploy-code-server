@@ -35,7 +35,9 @@ RUN sudo chown -R coder:coder /home/coder/.local
 
 # Install apt packages:
 # RUN sudo apt-get install -y ubuntu-make
-RUN sudo  useradd test123 && printf "passwd\npasswd\n" |  sudo passwd usrusr
+#RUN sudo  useradd test123 && printf "passwd\npasswd\n" |  sudo passwd usrusr
+#RUN sudo  useradd test123 && printf "yourpassword\nyourpassword\n" |  sudo passwd test123
+
 # Copy files: 
 # COPY deploy-container/myTool /home/coder/myTool
 
