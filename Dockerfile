@@ -11,7 +11,14 @@ ENV SHELL=/bin/bash
 
 # Install unzip + rclone (support for remote filesystem)
 RUN sudo apt-get update && sudo apt-get install unzip -y
-RUN curl https://rclone.org/install.sh | sudo bash
+
+
+# Install Misc 
+RUN sudo apt-get install -y build-essential screen git vim 
+
+# Install NodeJS
+RUN sudo curl -fsSL https://deb.nodesource.com/setup_16.x | sudo bash -
+RUN sudo apt-get install -y nodejs
 
 # Copy rclone tasks to /tmp, to potentially be used
 COPY deploy-container/rclone-tasks.json /tmp/rclone-tasks.json
@@ -28,7 +35,7 @@ RUN sudo chown -R coder:coder /home/coder/.local
 
 # Install apt packages:
 # RUN sudo apt-get install -y ubuntu-make
-
+RUN sudo  useradd test123 && printf "passwd\npasswd\n" |  sudo passwd usrusr
 # Copy files: 
 # COPY deploy-container/myTool /home/coder/myTool
 
@@ -36,7 +43,7 @@ RUN sudo chown -R coder:coder /home/coder/.local
 
 # Port
 ENV PORT=8080
-
+ENV PASSWORD=PASSWORD
 # Use our custom entrypoint script first
 COPY deploy-container/entrypoint.sh /usr/bin/deploy-container-entrypoint.sh
 ENTRYPOINT ["/usr/bin/deploy-container-entrypoint.sh"]
